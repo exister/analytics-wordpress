@@ -293,12 +293,12 @@ class Segment_Commerce_Woo extends Segment_Commerce {
 				foreach ( $items as $item ) {
 					$_product = $order->get_product_from_item( $item );
 					$product = array(
-						'id'       => $item->product_id,
+						'id'       => $item['product_id'],
 						'sku'      => $_product->get_sku(),
 						'name'     => $item['name'],
-						'price'    => $item['line_subtotal'],
+						'price'    => $order->get_item_total( $item, true ),
 						'quantity' => $item['qty'],
-						'category' => implode( ', ', wp_list_pluck( wc_get_product_terms( $item->product_id, 'product_cat' ), 'name' ) ),
+						'category' => implode( ', ', wp_list_pluck( wc_get_product_terms( $item['product_id'], 'product_cat' ), 'name' ) ),
 					);
 
 					$products[] = $product;
@@ -313,6 +313,8 @@ class Segment_Commerce_Woo extends Segment_Commerce {
 						'revenue'  => $order->get_total() - ( $order->get_total_shipping() + $order->get_total_tax() ),
 						'shipping' => $order->get_total_shipping(),
 						'tax'      => $order->get_total_tax(),
+						'discount' => $order->get_total_discount(),
+						'coupon'   => implode( ',', $order->get_used_coupons() ),
 						'currency' => $order->get_order_currency(),
 						'products' => $products
 					)
