@@ -559,7 +559,7 @@ class Segment_Analytics_WordPress {
 		}
 
 		if ( $page ) {
-			self::$instance->analytics->page( $page['page'], $page['properties'] );
+			self::$instance->analytics->page( $page['page'], $page['name'], $page['properties'] );
 		}
 	}
 
@@ -1033,6 +1033,8 @@ class Segment_Analytics_WordPress {
 
 			// Clean out empty properties before sending it back.
 			$page['properties'] = array_filter( $page['properties'] );
+
+			$page['name'] = isset( $page['name'] ) ? $page['name'] : '';
 		}
 
 		return $page;
