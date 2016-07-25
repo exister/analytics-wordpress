@@ -57,7 +57,7 @@ abstract class Segment_Commerce {
 	public function register_hook( $hook, $event, $args = 1, $class = '' ) {
 
 		$registered_events = $this->get_registered_hooks();
-
+		
 		if ( ! in_array( $event, $registered_events ) ) {
 			return false;
 		}
@@ -106,8 +106,14 @@ abstract class Segment_Commerce {
 
 		if ( class_exists( 'WP_eCommerce' ) ) {
 			include_once SEG_FILE_PATH . '/integrations/ecommerce/wp-e-commerce.php';
-		} else if ( class_exists( 'WooCommerce' ) ) {
+		}
+		
+		if ( class_exists( 'WooCommerce' ) ) {
 			include_once SEG_FILE_PATH . '/integrations/ecommerce/woocommerce.php';
+		}
+
+		if ( class_exists( 'Easy_Digital_Downloads' ) ) {
+			include_once SEG_FILE_PATH . '/integrations/ecommerce/easy-digital-downloads.php';
 		}
 
 	}
