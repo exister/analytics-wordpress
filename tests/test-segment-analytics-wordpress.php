@@ -21,6 +21,7 @@ class Segment_Analytics_WordPress_Test extends WP_UnitTestCase {
 		$this->assertFileExists( SEG_FILE_PATH . '/includes/class.segment-settings.php' );
 		$this->assertFileExists( SEG_FILE_PATH . '/includes/class.segment-cookie.php' );
 		$this->assertFileExists( SEG_FILE_PATH . '/integrations/ecommerce.php' );
+		$this->assertFileExists( SEG_FILE_PATH . '/integrations/forms.php' );
 		$this->assertFileExists( SEG_FILE_PATH . '/integrations/intercom.php' );
 	}
 

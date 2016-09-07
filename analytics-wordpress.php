@@ -322,6 +322,7 @@ class Segment_Analytics_WordPress {
 		include_once( SEG_FILE_PATH . '/includes/class.segment-settings.php' );
 		include_once( SEG_FILE_PATH . '/includes/class.segment-cookie.php' );
 		include_once( SEG_FILE_PATH . '/integrations/ecommerce.php' );
+		include_once( SEG_FILE_PATH . '/integrations/forms.php' );
 		include_once( SEG_FILE_PATH . '/integrations/intercom.php' );
 
 		do_action( 'segment_include_files', self::$instance );
