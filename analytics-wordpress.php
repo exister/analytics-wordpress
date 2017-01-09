@@ -3,11 +3,13 @@
 Plugin Name: Analytics for WordPress — by Segment.io
 Plugin URI: https://segment.io/plugins/wordpress
 Description: The hassle-free way to integrate any analytics service into your WordPress site.
-Version: 1.0.15
+Version: 1.0.16
 License: GPLv2
 Author: Segment.io
 Author URI: https://segment.io
 Author Email: friends@segment.io
+GitHub Plugin URI: https://github.com/exister/analytics-wordpress
+GitHub Branch: master
 */
 
 class Segment_Analytics {
@@ -739,8 +741,9 @@ class Segment_Analytics_WordPress {
 		// http://codex.wordpress.org/Function_Reference/wp_get_current_user
 		if ( is_user_logged_in() && $user ) {
 			$identify = array(
-				'user_id' => $user->user_email,
+				'user_id' => $user->ID,
 				'traits'  => array(
+					'id'		=> $user->ID,
 					'username'  => $user->user_login,
 					'email'     => $user->user_email,
 					'firstName' => $user->user_firstname,
@@ -752,16 +755,16 @@ class Segment_Analytics_WordPress {
 		}
 		// We've got a commenter.
 		// http://codex.wordpress.org/Function_Reference/wp_get_current_commenter
-		else if ( $commenter ) {
-			$identify = array(
-				'user_id' => $commenter['comment_author_email'],
-				'traits'  => array(
-					'email' => $commenter['comment_author_email'],
-					'name'  => $commenter['comment_author'],
-					'url'   => $commenter['comment_author_url']
-				)
-			);
-		}
+		// else if ( $commenter ) {
+		// 	$identify = array(
+		// 		'user_id' => $commenter['comment_author_email'],
+		// 		'traits'  => array(
+		// 			'email' => $commenter['comment_author_email'],
+		// 			'name'  => $commenter['comment_author'],
+		// 			'url'   => $commenter['comment_author_url']
+		// 		)
+		// 	);
+		// }
 
 		if ( $identify ) {
 			// Clean out empty traits before sending it back.
@@ -799,6 +802,7 @@ class Segment_Analytics_WordPress {
 				$track = array(
 					'event'      => __( 'Logged In', 'segment' ),
 					'properties' => array(
+						'id'		=> $user->ID,
 						'username'  => $user->user_login,
 						'email'     => $user->user_email,
 						'name'      => $user->display_name,
@@ -952,6 +956,7 @@ class Segment_Analytics_WordPress {
 			$track = array(
 				'event'      => __( 'User Signed Up', 'segment' ),
 				'properties' => array(
+					'id'		=> $user->ID,
 					'username'  => $user->user_login,
 					'email'     => $user->user_email,
 					'name'      => $user->display_name,
@@ -998,8 +1003,9 @@ class Segment_Analytics_WordPress {
 			$user    = get_user_by( 'id', $user_id );
 
 			$identify = array(
-				'user_id' => $user->user_email,
+				'user_id' => $user->ID,
 				'traits'  => array(
+					'id'		=> $user->ID,
 					'username'  => $user->user_login,
 					'email'     => $user->user_email,
 					'firstName' => $user->user_firstname,
