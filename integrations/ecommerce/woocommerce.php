@@ -75,9 +75,9 @@ class Segment_Commerce_Woo extends Segment_Commerce {
 				$product = get_product( get_queried_object_id() );
 
 				$track = array(
-					'event'      => __( 'Viewed Product', 'segment' ),
+					'event'      => 'Product Viewed',
 					'properties' => array(
-						'id'       => $product->id,
+						'product_id' => $product->id,
 						'sku'      => $product->get_sku(),
 						'name'     => $product->get_title(),
 						'price'    => $product->get_price(),
@@ -157,7 +157,7 @@ class Segment_Commerce_Woo extends Segment_Commerce {
 
 				if ( $product ) {
 					$item = array(
-						'id'       => $product->id,
+						'product_id' => $product->id,
 						'sku'      => $product->get_sku(),
 						'name'     => $product->get_title(),
 						'price'    => $product->get_price(),
@@ -166,7 +166,7 @@ class Segment_Commerce_Woo extends Segment_Commerce {
 					);
 
 					$track = array(
-						'event'      => __( 'Added Product', 'segment' ),
+						'event'      => 'Product Added',
 						'properties' => $item,
 						'http_event' => 'added_to_cart'
 					);
@@ -243,7 +243,7 @@ class Segment_Commerce_Woo extends Segment_Commerce {
 
 				if ( $product ) {
 					$item = array(
-						'id'       => $product->ID,
+						'product_id' => $product->ID,
 						'sku'      => $product->get_sku(),
 						'name'     => $product->get_title(),
 						'price'    => $product->get_price(),
@@ -252,7 +252,7 @@ class Segment_Commerce_Woo extends Segment_Commerce {
 					);
 
 					$track = array(
-						'event'      => __( 'Removed Product', 'segment' ),
+						'event'      => 'Product Removed',
 						'properties' => $item,
 						'http_event' => 'removed_from_cart'
 					);
@@ -293,7 +293,7 @@ class Segment_Commerce_Woo extends Segment_Commerce {
 				foreach ( $items as $item ) {
 					$_product = $order->get_product_from_item( $item );
 					$product = array(
-						'id'       => $item['product_id'],
+						'product_id' => $item['product_id'],
 						'sku'      => $_product->get_sku(),
 						'name'     => $item['name'],
 						'price'    => $order->get_item_total( $item, true ),
@@ -306,9 +306,9 @@ class Segment_Commerce_Woo extends Segment_Commerce {
 				}
 
 				$track = array(
-					'event'      => __( 'Completed Order', 'segment' ),
+					'event'      => 'Order Completed',
 					'properties' => array(
-						'id'       => $order->get_order_number(),
+						'order_id' => $order->get_order_number(),
 						'total'    => $order->get_total(),
 						'revenue'  => $order->get_total() - ( $order->get_total_shipping() + $order->get_total_tax() ),
 						'shipping' => $order->get_total_shipping(),
