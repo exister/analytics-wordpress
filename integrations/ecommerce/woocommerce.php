@@ -80,7 +80,7 @@ class Segment_Commerce_Woo extends Segment_Commerce {
 						'product_id' => $product->id,
 						'sku'      => $product->get_sku(),
 						'name'     => $product->get_title(),
-						'price'    => $product->get_price(),
+						'price'    => round((float) $product->get_price(), 2),
 						'category' => implode( ', ', wp_list_pluck( wc_get_product_terms( $product->ID, 'product_cat' ), 'name' ) ),
 					)
 				);
@@ -160,7 +160,7 @@ class Segment_Commerce_Woo extends Segment_Commerce {
 						'product_id' => $product->id,
 						'sku'      => $product->get_sku(),
 						'name'     => $product->get_title(),
-						'price'    => $product->get_price(),
+						'price'    => round((float) $product->get_price(), 2),
 						'quantity' => $_product->quantity,
 						'category' => implode( ', ', wp_list_pluck( wc_get_product_terms( $product->id, 'product_cat' ), 'name' ) ),
 					);
@@ -246,7 +246,7 @@ class Segment_Commerce_Woo extends Segment_Commerce {
 						'product_id' => $product->ID,
 						'sku'      => $product->get_sku(),
 						'name'     => $product->get_title(),
-						'price'    => $product->get_price(),
+						'price'    => round((float) $product->get_price(), 2),
 						'quantity' => 0,
 						'category' => implode( ', ', wp_list_pluck( wc_get_product_terms( $product->ID, 'product_cat' ), 'name' ) ),
 					);
